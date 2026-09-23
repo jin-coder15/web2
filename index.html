@@ -1,0 +1,651 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Happy Birthday ❤️</title>
+
+    <style>
+        /* =========================================================
+           RESET
+        ========================================================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        body {
+            background: #09000d;
+            font-family: Arial, Helvetica, sans-serif;
+            color: white;
+        }
+
+        /* =========================================================
+           MAIN SCREEN
+        ========================================================= */
+        .birthday-screen {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+
+            background:
+                radial-gradient(
+                    circle at 50% 50%,
+                    rgba(255, 20, 147, 0.15),
+                    transparent 45%
+                ),
+                linear-gradient(
+                    135deg,
+                    #09000d 0%,
+                    #1a001d 45%,
+                    #09000d 100%
+                );
+        }
+
+        /* =========================================================
+           SOFT BACKGROUND GLOW
+        ========================================================= */
+        .glow {
+            position: absolute;
+            width: 45vw;
+            height: 45vw;
+            max-width: 600px;
+            max-height: 600px;
+
+            border-radius: 50%;
+
+            background: rgba(255, 20, 147, 0.08);
+
+            filter: blur(70px);
+
+            animation: glowMove 8s ease-in-out infinite alternate;
+
+            pointer-events: none;
+        }
+
+        .glow.one {
+            top: -15%;
+            left: -10%;
+        }
+
+        .glow.two {
+            right: -10%;
+            bottom: -15%;
+
+            background: rgba(170, 0, 255, 0.08);
+
+            animation-delay: -4s;
+        }
+
+        @keyframes glowMove {
+            from {
+                transform: translate3d(0, 0, 0) scale(1);
+            }
+
+            to {
+                transform: translate3d(30px, -20px, 0) scale(1.15);
+            }
+        }
+
+        /* =========================================================
+           BIRTHDAY TEXT CONTAINER
+        ========================================================= */
+        #birthdayContainer {
+            position: absolute;
+            inset: -5%;
+
+            width: 110%;
+            height: 110%;
+
+            overflow: hidden;
+
+            pointer-events: none;
+        }
+
+        /* =========================================================
+           HAPPY BIRTHDAY TEXT
+        ========================================================= */
+        .birthday-text {
+            position: absolute;
+
+            white-space: nowrap;
+
+            font-weight: 900;
+            letter-spacing: 2px;
+
+            user-select: none;
+
+            will-change: transform, opacity;
+
+            text-shadow:
+                0 0 6px rgba(255, 70, 180, 0.8),
+                0 0 18px rgba(255, 0, 140, 0.45);
+
+            animation-name: floatBirthday;
+            animation-timing-function: ease-in-out;
+            animation-iteration-count: infinite;
+
+            /* Prevent accidental selection/rendering issues */
+            backface-visibility: hidden;
+            transform: translate3d(0, 0, 0);
+        }
+
+        @keyframes floatBirthday {
+            0% {
+                transform:
+                    translate3d(0, 0, 0)
+                    rotate(var(--rotation))
+                    scale(0.92);
+
+                opacity: 0.25;
+            }
+
+            25% {
+                opacity: 0.85;
+            }
+
+            50% {
+                transform:
+                    translate3d(
+                        var(--move-x),
+                        var(--move-y),
+                        0
+                    )
+                    rotate(var(--rotation))
+                    scale(1.04);
+
+                opacity: 1;
+            }
+
+            75% {
+                opacity: 0.85;
+            }
+
+            100% {
+                transform:
+                    translate3d(0, 0, 0)
+                    rotate(var(--rotation))
+                    scale(0.92);
+
+                opacity: 0.25;
+            }
+        }
+
+        /* =========================================================
+           ROMANTIC COLORS
+        ========================================================= */
+        .pink {
+            color: #ff6bbd;
+        }
+
+        .hot-pink {
+            color: #ff1493;
+        }
+
+        .rose {
+            color: #ff8fcf;
+        }
+
+        .purple {
+            color: #d98cff;
+        }
+
+        .white-pink {
+            color: #ffd6ed;
+        }
+
+        /* =========================================================
+           CENTER MESSAGE
+        ========================================================= */
+        .center-message {
+            position: absolute;
+
+            top: 50%;
+            left: 50%;
+
+            transform: translate(-50%, -50%);
+
+            z-index: 10;
+
+            text-align: center;
+
+            padding: 18px 25px;
+
+            pointer-events: none;
+
+            animation: centerPulse 3s ease-in-out infinite;
+        }
+
+        .center-message h1 {
+            font-size: clamp(26px, 6vw, 70px);
+
+            font-weight: 900;
+
+            letter-spacing: 3px;
+
+            color: #fff;
+
+            text-shadow:
+                0 0 8px #ff1493,
+                0 0 25px rgba(255, 20, 147, 0.8),
+                0 0 55px rgba(255, 20, 147, 0.45);
+        }
+
+        .center-message p {
+            margin-top: 8px;
+
+            font-size: clamp(11px, 2vw, 18px);
+
+            letter-spacing: 4px;
+
+            color: #ffc4e5;
+
+            opacity: 0.8;
+        }
+
+        @keyframes centerPulse {
+            0%,
+            100% {
+                transform: translate(-50%, -50%) scale(1);
+            }
+
+            50% {
+                transform: translate(-50%, -50%) scale(1.035);
+            }
+        }
+
+        /* =========================================================
+           HEARTS
+        ========================================================= */
+        .heart {
+            position: absolute;
+
+            bottom: -30px;
+
+            font-size: 15px;
+
+            color: #ff4fa8;
+
+            opacity: 0;
+
+            pointer-events: none;
+
+            will-change: transform, opacity;
+
+            animation: heartFloat linear forwards;
+
+            text-shadow:
+                0 0 8px rgba(255, 20, 147, 0.8);
+        }
+
+        @keyframes heartFloat {
+            0% {
+                transform:
+                    translate3d(0, 0, 0)
+                    scale(0.7)
+                    rotate(0deg);
+
+                opacity: 0;
+            }
+
+            15% {
+                opacity: 0.8;
+            }
+
+            85% {
+                opacity: 0.5;
+            }
+
+            100% {
+                transform:
+                    translate3d(var(--heart-x), -110vh, 0)
+                    scale(1.2)
+                    rotate(180deg);
+
+                opacity: 0;
+            }
+        }
+
+        /* =========================================================
+           MOBILE OPTIMIZATION
+        ========================================================= */
+        @media (max-width: 600px) {
+
+            .birthday-text {
+                letter-spacing: 1px;
+
+                text-shadow:
+                    0 0 5px rgba(255, 70, 180, 0.7),
+                    0 0 12px rgba(255, 0, 140, 0.35);
+            }
+
+            .center-message {
+                padding: 12px 16px;
+            }
+
+            .center-message h1 {
+                letter-spacing: 2px;
+            }
+
+            .center-message p {
+                letter-spacing: 2px;
+            }
+
+            .glow {
+                filter: blur(50px);
+            }
+        }
+
+        /* =========================================================
+           REDUCE MOTION ACCESSIBILITY
+        ========================================================= */
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="birthday-screen">
+
+        <!-- Soft background glows -->
+        <div class="glow one"></div>
+        <div class="glow two"></div>
+
+        <!-- Random HAPPY BIRTHDAY texts -->
+        <div id="birthdayContainer"></div>
+
+        <!-- Small floating hearts -->
+        <div id="heartContainer"></div>
+
+        <!-- Center message -->
+        <div class="center-message">
+            <h1>HAPPY BIRTHDAY Meri Jaan...❤️</h1>
+            <p>Happy Birthday My Girl...😘</p>
+        </div>
+
+    </main>
+
+
+    <script>
+        /* =========================================================
+           CONFIGURATION
+        ========================================================= */
+
+        const birthdayContainer =
+            document.getElementById("birthdayContainer");
+
+        const heartContainer =
+            document.getElementById("heartContainer");
+
+
+        /*
+            Desktop = more text
+            Mobile = fewer text elements for better performance
+        */
+
+        const isMobile = window.innerWidth <= 600;
+
+        const TEXT_COUNT = isMobile ? 115 : 190;
+
+
+        /* =========================================================
+           RANDOM HELPERS
+        ========================================================= */
+
+        function random(min, max) {
+            return Math.random() * (max - min) + min;
+        }
+
+        function randomInt(min, max) {
+            return Math.floor(random(min, max + 1));
+        }
+
+
+        /* =========================================================
+           ROMANTIC COLORS
+        ========================================================= */
+
+        const colors = [
+            "#ff1493",
+            "#ff4fac",
+            "#ff6fbd",
+            "#ff91ca",
+            "#d98cff",
+            "#e7b0ff",
+            "#ffd6ed"
+        ];
+
+
+        /* =========================================================
+           CREATE HAPPY BIRTHDAY TEXT
+        ========================================================= */
+
+        function createBirthdayText(index) {
+
+            const text = document.createElement("div");
+
+            text.className = "birthday-text";
+
+            text.textContent = "HAPPY BIRTHDAY";
+
+            /*
+                Random font size
+            */
+
+            const size = isMobile
+                ? random(14, 28)
+                : random(18, 46);
+
+            text.style.fontSize = `${size}px`;
+
+
+            /*
+                Random position
+            */
+
+            text.style.left = `${random(-5, 95)}%`;
+            text.style.top = `${random(-3, 98)}%`;
+
+
+            /*
+                Random rotation
+            */
+
+            const rotation = random(-25, 25);
+
+            text.style.setProperty(
+                "--rotation",
+                `${rotation}deg`
+            );
+
+
+            /*
+                Random movement
+            */
+
+            const moveX = random(-30, 30);
+            const moveY = random(-25, 25);
+
+            text.style.setProperty(
+                "--move-x",
+                `${moveX}px`
+            );
+
+            text.style.setProperty(
+                "--move-y",
+                `${moveY}px`
+            );
+
+
+            /*
+                Random animation duration
+            */
+
+            const duration = random(4.5, 9);
+
+            text.style.animationDuration =
+                `${duration}s`;
+
+
+            /*
+                Different starting animation timing
+            */
+
+            text.style.animationDelay =
+                `${random(-duration, 0)}s`;
+
+
+            /*
+                Random color
+            */
+
+            text.style.color =
+                colors[
+                    randomInt(0, colors.length - 1)
+                ];
+
+
+            /*
+                Random opacity
+            */
+
+            text.style.opacity =
+                random(0.35, 0.9);
+
+
+            birthdayContainer.appendChild(text);
+        }
+
+
+        /* =========================================================
+           FILL SCREEN
+        ========================================================= */
+
+        for (let i = 0; i < TEXT_COUNT; i++) {
+            createBirthdayText(i);
+        }
+
+
+        /* =========================================================
+           FLOATING HEARTS
+        ========================================================= */
+
+        const heartCharacters = [
+            "❤️",
+            "😘",
+            "🎈"
+        ];
+
+
+        function createHeart() {
+
+            const heart = document.createElement("span");
+
+            heart.className = "heart";
+
+            heart.textContent =
+                heartCharacters[
+                    randomInt(
+                        0,
+                        heartCharacters.length - 1
+                    )
+                ];
+
+
+            heart.style.left =
+                `${random(0, 100)}%`;
+
+
+            heart.style.fontSize =
+                `${random(10, 20)}px`;
+
+
+            heart.style.setProperty(
+                "--heart-x",
+                `${random(-80, 80)}px`
+            );
+
+
+            const duration =
+                random(6, 11);
+
+            heart.style.animationDuration =
+                `${duration}s`;
+
+
+            heartContainer.appendChild(heart);
+
+
+            /*
+                Remove heart after animation
+            */
+
+            setTimeout(() => {
+                heart.remove();
+            }, duration * 1000 + 500);
+        }
+
+
+        /*
+            Create hearts slowly so they don't
+            overload mobile devices.
+        */
+
+        setInterval(() => {
+
+            if (heartContainer.childElementCount < 18) {
+                createHeart();
+            }
+
+        }, 650);
+
+
+        /* =========================================================
+           HANDLE RESIZE
+        ========================================================= */
+
+        let lastWidth = window.innerWidth;
+
+        window.addEventListener(
+            "resize",
+            () => {
+
+                /*
+                    Don't rebuild everything on
+                    every tiny mobile browser resize.
+                */
+
+                if (
+                    Math.abs(window.innerWidth - lastWidth) > 100
+                ) {
+                    lastWidth = window.innerWidth;
+                    location.reload();
+                }
+            },
+            { passive: true }
+        );
+    </script>
+
+</body>
+</html>
+```
